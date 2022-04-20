@@ -5,84 +5,69 @@
 //el mesero entrega 
 
 //aqui vamos de nuevo
-const open = (ingrediente) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            console.log(`${ingrediente} abierto`);
-            resolve(ingrediente);
-        }, 1000);
-    });
-}
+const CocinandoHuevosRancheros = () => {
+    const ingrediente = "Huevos";
 
-const freir = (ingrediente) => {
+const abrir = (ingrediente) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            console.log(`${ingrediente} frito`);
-            resolve(ingrediente);
+            if (ingrediente == "Huevos") {
+              const resultado = `${ingrediente} abiertos`;
+              console.log(resultado);
+              resolve(resultado);
+            }else {
+              reject("Ingrediente inválido");
+            }
         }, 1000);
     });
 };
 
-const placeSauce = (ingrediente) => {
+const freir = (ingrediente) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            console.log(`${ingrediente} bañado`);
-            resolve(ingrediente);
-        }, 1000); 
-    });
-}
-
-const cowboysEggs = () => {
-    const ingrediente = "Huevo"
-
-    open(ingrediente).then(freir).then(placeSauce).then((resultado) => {
-        setTimeout(() => {
-         console.log(`${resultado} servidos`);
+            if (ingrediente == "Huevos abiertos") {
+              const resultado = `Huevos fritos`;
+              console.log(resultado);
+              resolve(resultado);
+            }else {
+              reject("No se puede freir");
+            }
         }, 1000);
     });
+};
 
-    // open(ingrediente,  () => {
-    //     freir(ingrediente, () => {
-    //         placeSauce(ingrediente, () => {
-    //             console.log("Huevos servidos"); //en este caso es un console.log
-    //         });
-    //     });
-    // });
+const salsa = (ingrediente) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (ingrediente == "Huevos fritos") {
+              const resultado = `Huevos rancheros`; 
+              console.log(resultado);
+              resolve(resultado);
+            }else {
+              reject("Ingrediente inválido");
+            }
+        }, 1000); 
+    });
+};
 
-//     setTimeout(() => {
-//     //abrir los huevos
-//     console.log("Huevos abiertos");
-//     }, 1000);
-    
-//     setTimeout(() => {
-//         //freirlos
-//     console.log("Huevos fritos");
-//     }, 3000);
+    abrir(ingrediente)
+     .then(freir)
+     .then(salsa)
+     .then((resultado) => {
+         return `${resultado} Servidos`;
+     })
+     .catch((err) => {
+         console.log(err);
+     }).finally(() => {
+         console.log("El proceso ha finalizado");
+     });
+};
 
-//     setTimeout(() => {
-//         //colocar salsa ranchera
-//     console.log("Huevos bañados");
-//     }, 1000);
+const CocinandoMolletes = () => {
 
-//     return "Huevos rancheros";
-//   //servir
 }
 
-const order1 = cowboysEggs();
-//console.log(order1);
-
-
-const cookMolletations = () => {
-
-//molletes
-  //partir el pan
-  //colocar frijoles
-  //colocar queso
-  //hornear
-  //servir
-}
-
-const cookChilaquiles = () => {
+const CocinandoChilaquiles = () => {
 
 
 //chilaquiles
@@ -90,3 +75,8 @@ const cookChilaquiles = () => {
   //se coloca la salsa
   //servir
 }
+
+
+const order1 = CocinandoHuevosRancheros();
+const orden2 = CocinandoMolletes();
+const orden3 = CocinandoChilaquiles();
