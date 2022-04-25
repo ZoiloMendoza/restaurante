@@ -5,7 +5,7 @@
 //el mesero entrega 
 
 //aqui vamos de nuevo
-const CocinandoHuevosRancheros = () => {
+const CocinandoHuevosRancheros =  () => {
     const ingrediente = "Huevos";
 
 const abrir = (ingrediente) => {
