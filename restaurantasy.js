@@ -5,10 +5,10 @@
 //el mesero entrega 
 
 //aqui vamos de nuevo
-const CocinandoHuevosRancheros = () => {
+const CocinandoHuevosRancheros = async () => {
     const ingrediente = "Huevos";
 
-const abrir = (ingrediente) => {
+ const abrir = (ingrediente) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             if (ingrediente == "Huevos") {
@@ -20,9 +20,9 @@ const abrir = (ingrediente) => {
             }
         }, 1000);
     });
-};
+ };
 
-const freir = (ingrediente) => {
+ const freir = (ingrediente) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             if (ingrediente == "Huevos abiertos") {
@@ -34,9 +34,9 @@ const freir = (ingrediente) => {
             }
         }, 1000);
     });
-};
+ };
 
-const salsa = (ingrediente) => {
+ const salsa = (ingrediente) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             if (ingrediente == "Huevos fritos") {
@@ -48,19 +48,27 @@ const salsa = (ingrediente) => {
             }
         }, 1000); 
     });
-};
-
-    abrir(ingrediente)
-     .then(freir)
-     .then(salsa)
-     .then((resultado) => {
-         return `${resultado} Servidos`;
-     })
-     .catch((err) => {
-         console.log(err);
-     }).finally(() => {
-         console.log("El proceso ha finalizado");
-     });
+ };
+    try {
+        const abriendoHuevos = await abrir(ingrediente);
+        const freirHuevos = await freir(abriendoHuevos);
+        return await salsa(freirHuevos);
+    } catch (error) {
+        console.log("Ocurrio un error:", error)
+    }
+    
+    //return resultado;
+    // abrir(ingrediente)
+    //  .then(freir)
+    //  .then(salsa)
+    //  .then((resultado) => {
+    //      return `${resultado} Servidos`;
+    //  })
+    //  .catch((err) => {
+    //      console.log(err);
+    //  }).finally(() => {
+    //      console.log("El proceso ha finalizado");
+    //  });
 };
 
 const CocinandoMolletes = () => {
@@ -77,6 +85,14 @@ const CocinandoChilaquiles = () => {
 }
 
 
-const order1 = CocinandoHuevosRancheros();
-const orden2 = CocinandoMolletes();
-const orden3 = CocinandoChilaquiles();
+
+const imprimirOrden = async () => {
+    const orden1 =  await CocinandoHuevosRancheros();
+    const orden2 = CocinandoMolletes();
+    const orden3 = CocinandoChilaquiles();
+
+    console.log("Orden 1", orden1);
+}
+
+imprimirOrden();
+//console.log("Orden 1", orden1);
